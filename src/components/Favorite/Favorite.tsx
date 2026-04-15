@@ -20,7 +20,7 @@ export const Favorite: React.FC = () => {
                 className={`${styles.breadcrumb__link} ${styles['breadcrumb__link--home']}`}
               >
                 <img
-                  src="src/images/icons/Home.svg"
+                  src="images/icons/Home.svg"
                   alt="Home"
                   className={styles['breadcrumb__home-icon']}
                 />

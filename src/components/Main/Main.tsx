@@ -26,9 +26,9 @@ export const Main: React.FC = () => {
   ).length;
 
   const banners = [
-    { src: 'src/images/banner1.jpg', link: '/tablets' },
-    { src: 'src/images/banner2.png', link: '/phones' },
-    { src: 'src/images/banner3.png', link: '/accessories' },
+    { src: 'images/banner1.jpg', link: '/tablets' },
+    { src: 'images/banner2.png', link: '/phones' },
+    { src: 'images/banner3.png', link: '/accessories' },
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -214,7 +214,7 @@ export const Main: React.FC = () => {
         <div className={styles.categories__container}>
           <Link to="/phones" className={styles.categories__item}>
             <div className={styles['categories__img-wrapper']}>
-              <img src="src/images/Phones.svg" alt="Phones" />
+              <img src="images/Phones.svg" alt="Phones" />
             </div>
             <p className={styles.categories__name}>
               {t('main.category_phones')}
@@ -225,7 +225,7 @@ export const Main: React.FC = () => {
           </Link>
           <Link to="/tablets" className={styles.categories__item}>
             <div className={styles['categories__img-wrapper']}>
-              <img src="src/images/Tablets.svg" alt="Tablets" />
+              <img src="images/Tablets.svg" alt="Tablets" />
             </div>
             <p className={styles.categories__name}>
               {t('main.category_tablets')}
@@ -236,7 +236,7 @@ export const Main: React.FC = () => {
           </Link>
           <Link to="/accessories" className={styles.categories__item}>
             <div className={styles['categories__img-wrapper']}>
-              <img src="src/images/Accessories.svg" alt="Accessories" />
+              <img src="images/Accessories.svg" alt="Accessories" />
             </div>
             <p className={styles.categories__name}>
               {t('main.category_accessories')}

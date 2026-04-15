@@ -114,13 +114,13 @@ export const Tablets: React.FC = () => {
         <nav className={styles.breadcrumbs}>
           <Link to="/" className={styles.breadcrumbs__link}>
             <img
-              src="src/images/icons/home.svg"
+              src="images/icons/home.svg"
               alt="home"
               className={styles.breadcrumbs__icon}
             />
           </Link>
           <img
-            src="src/images/icons/arrow-right.png"
+            src="images/icons/arrow-right.png"
             alt="arrow"
             className={styles.breadcrumbs__arrow}
           />
