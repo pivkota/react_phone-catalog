@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useFavorites } from '../../context/FavoritesContext';
 import { useCart } from '../../context/CartContext';
-import styles from './aside.module.scss';
+import styles from './Aside.module.scss';
 
 interface Props {
   isOpen: boolean;
