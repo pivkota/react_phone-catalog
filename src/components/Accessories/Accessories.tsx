@@ -129,14 +129,14 @@ export const Accessories: React.FC = () => {
         >
           <Link to="/" className={styles.breadcrumbs__link}>
             <img
-              src="/src/images/icons/home.svg"
+              src="src/images/icons/home.svg"
               alt="home"
               className={styles.breadcrumbs__icon}
             />
           </Link>
 
           <img
-            src="/src/images/icons/arrow-right.png"
+            src="src/images/icons/arrow-right.png"
             alt="arrow"
             className={styles.breadcrumbs__arrow}
           />

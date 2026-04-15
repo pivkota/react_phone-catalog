@@ -120,7 +120,7 @@ export const Tablets: React.FC = () => {
             />
           </Link>
           <img
-            src="/src/images/icons/arrow-right.png"
+            src="src/images/icons/arrow-right.png"
             alt="arrow"
             className={styles.breadcrumbs__arrow}
           />

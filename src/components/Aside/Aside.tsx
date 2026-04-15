@@ -26,12 +26,12 @@ export const Aside: React.FC<Props> = ({ isOpen, onClose }) => {
     <aside className={`${styles.menu} ${isOpen ? styles['menu--open'] : ''}`}>
       <div className={styles.menu__header}>
         <img
-          src="/src/images/icons/Logo.svg"
+          src="src/images/icons/Logo.svg"
           alt="Nice Gadgets Logo"
           className={styles.menu__logo}
         />
         <button className={styles.menu__close} onClick={onClose}>
-          <img src="/src/images/icons/close.svg" alt="Close menu" />
+          <img src="src/images/icons/close.svg" alt="Close menu" />
         </button>
       </div>
 
@@ -128,7 +128,7 @@ export const Aside: React.FC<Props> = ({ isOpen, onClose }) => {
           }
           onClick={onClose}
         >
-          <img src="/src/images/icons/shoppingbag-icon.svg" alt="Cart" />
+          <img src="src/images/icons/shoppingbag-icon.svg" alt="Cart" />
           {cartCount > 0 && (
             <span className={styles.menu__badge}>{cartCount}</span>
           )}
