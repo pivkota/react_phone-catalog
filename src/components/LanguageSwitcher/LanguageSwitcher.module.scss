@@ -1,0 +1,28 @@
+@import '../variables';
+
+.lang-switcher {
+  display: flex;
+  gap: 8px;
+
+  &__btn {
+    background: transparent;
+    border: 1px solid $color-elements;
+    color: $text-secondary;
+    padding: 4px 8px;
+    cursor: pointer;
+    font-family: $font-main;
+    font-size: 12px;
+    transition: all 0.3s;
+
+    &:hover {
+      border-color: $text-primary;
+      color: $text-primary;
+    }
+
+    &--active {
+      background-color: $color-accent;
+      color: #fff;
+      border-color: $color-accent;
+    }
+  }
+}

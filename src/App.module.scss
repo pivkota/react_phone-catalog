@@ -1,0 +1,18 @@
+// App.module.scss
+@import '../src/components/variables';
+
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: $bg-main;
+
+  &__main {
+    flex-grow: 1;
+    padding-top: 64px;
+
+    @media (min-width: 640px) {
+      padding-top: 80px;
+    }
+  }
+}
