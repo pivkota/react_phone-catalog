@@ -170,15 +170,15 @@
     background-size: contain;
 
     &--favorite {
-      background-image: url('../../images/icons/heart-icon.svg');
+      background-image: url('/images/icons/heart-icon.svg');
     }
 
     &--cart {
-      background-image: url('../../images/icons/shoppingbag-icon.svg');
+      background-image: url('/images/icons/shoppingbag-icon.svg');
     }
 
     &--burger {
-      background-image: url('../../images/icons/menu-icon.svg');
+      background-image: url('/images/icons/menu-icon.svg');
     }
   }
 

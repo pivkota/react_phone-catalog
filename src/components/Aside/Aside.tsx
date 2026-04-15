@@ -31,7 +31,7 @@ export const Aside: React.FC<Props> = ({ isOpen, onClose }) => {
           className={styles.menu__logo}
         />
         <button className={styles.menu__close} onClick={onClose}>
-          <img src="images/icons/close.svg" alt="Close menu" />
+          <img src="/images/icons/close.svg" alt="Close menu" />
         </button>
       </div>
 
@@ -113,7 +113,7 @@ export const Aside: React.FC<Props> = ({ isOpen, onClose }) => {
           }
           onClick={onClose}
         >
-          <img src="images/icons/heart-icon.svg" alt="Favorites" />
+          <img src="/images/icons/heart-icon.svg" alt="Favorites" />
           {favoritesCount > 0 && (
             <span className={styles.menu__badge}>{favoritesCount}</span>
           )}
@@ -128,7 +128,7 @@ export const Aside: React.FC<Props> = ({ isOpen, onClose }) => {
           }
           onClick={onClose}
         >
-          <img src="images/icons/shoppingbag-icon.svg" alt="Cart" />
+          <img src="/images/icons/shoppingbag-icon.svg" alt="Cart" />
           {cartCount > 0 && (
             <span className={styles.menu__badge}>{cartCount}</span>
           )}

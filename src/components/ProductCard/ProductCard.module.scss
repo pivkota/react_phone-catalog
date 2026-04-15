@@ -191,7 +191,7 @@
 
     background-color: $color-surface2;
 
-    background-image: url('../../images/button-icon/Heart-Like.svg');
+    background-image: url('/images/button-icon/Heart-Like.svg');
     background-repeat: no-repeat;
     background-position: center;
     background-size: 16px;
@@ -216,7 +216,7 @@
       outline: none;
 
       background-color: $bg-main;
-      background-image: url('../../images/button-icon/Heart-Full.svg');
+      background-image: url('/images/button-icon/Heart-Full.svg');
 
       &:hover {
         background-color: $color-icons;

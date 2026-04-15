@@ -119,14 +119,14 @@ export const Phones: React.FC = () => {
         <nav className={`${styles.phones__breadcrumbs} ${styles.breadcrumbs}`}>
           <Link to="/" className={styles.breadcrumbs__link}>
             <img
-              src="images/icons/home.svg"
+              src="/images/icons/home.svg"
               alt="home"
               className={styles.breadcrumbs__icon}
             />
           </Link>
 
           <img
-            src="images/icons/arrow-right.png"
+            src="/images/icons/arrow-right.png"
             alt="arrow"
             className={styles.breadcrumbs__arrow}
           />

@@ -96,7 +96,7 @@
     --btn-rotate: 0deg;
     --btn-scale: 1;
 
-    background-image: url('images/button-icon/default.svg');
+    background-image: url('/images/button-icon/default.svg');
     transform: rotate(var(--btn-rotate)) scale(var(--btn-scale));
 
     &--left {
@@ -110,7 +110,7 @@
       opacity: 0.5;
       border-color: $color-elements;
       background-color: transparent;
-      background-image: url('images/button-icon/disabled.svg');
+      background-image: url('/images/button-icon/disabled.svg');
       cursor: default;
     }
 

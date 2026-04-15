@@ -11,7 +11,7 @@ export const NotFoundPage: React.FC = () => {
       <h1 className={styles['not-found__title']}>{t('not_found.title')}</h1>
 
       <img
-        src="images/icons/shoppingbag-icon.svg"
+        src="/images/icons/shoppingbag-icon.svg"
         alt="Not found"
         className={styles['not-found__icon']}
       />

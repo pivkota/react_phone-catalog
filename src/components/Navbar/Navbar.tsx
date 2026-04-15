@@ -37,7 +37,7 @@ export const Navbar: React.FC<Props> = ({
     <nav className={styles.navbar}>
       <div className={styles.navbar__container}>
         <Link to="/" className={styles.navbar__logo}>
-          <img src="images/icons/Logo.svg" alt="logo" />
+          <img src="/images/icons/Logo.svg" alt="logo" />
         </Link>
 
         <ul className={styles.navbar__list}>
