@@ -491,7 +491,7 @@
     margin: 0;
     cursor: pointer;
     background-color: $color-surface2;
-    background-image: url('/src/images/button-icon/default.svg');
+    background-image: url('/images/button-icon/default.svg');
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
@@ -506,12 +506,12 @@
       opacity: 0.5;
       cursor: default;
       background-color: transparent;
-      background-image: url('/src/images/button-icon/disabled.svg');
+      background-image: url('/images/button-icon/disabled.svg');
       border-color: $color-elements;
     }
 
     &:hover:not(:disabled) {
-      background-image: url('/src/images/button-icon/hover.svg');
+      background-image: url('/images/button-icon/hover.svg');
     }
 
     &:active:not(:disabled) {

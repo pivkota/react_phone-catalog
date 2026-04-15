@@ -96,7 +96,7 @@
     --btn-rotate: 0deg;
     --btn-scale: 1;
 
-    background-image: url('/src/images/button-icon/default.svg');
+    background-image: url('images/button-icon/default.svg');
     transform: rotate(var(--btn-rotate)) scale(var(--btn-scale));
 
     &--left {
@@ -110,12 +110,12 @@
       opacity: 0.5;
       border-color: $color-elements;
       background-color: transparent;
-      background-image: url('/src/images/button-icon/disabled.svg');
+      background-image: url('images/button-icon/disabled.svg');
       cursor: default;
     }
 
     &:hover:not(:disabled) {
-      background-image: url('/src/images/button-icon/hover.svg');
+      background-image: url('/images/button-icon/hover.svg');
     }
 
     &:active:not(:disabled) {
@@ -300,7 +300,7 @@
       height: 200px;
       flex-shrink: 0;
       background-color: $color-surface2;
-      background-image: url('/src/images/button-icon/Arrow-Rigth.svg');
+      background-image: url('/images/button-icon/Arrow-Rigth.svg');
       background-repeat: no-repeat;
       background-position: center;
       background-size: 16px 16px;
@@ -324,7 +324,7 @@
 
     &:hover:not(:disabled) {
       background-color: $color-icons;
-      background-image: url('/src/images/button-icon/Arrow-Rigth.svg');
+      background-image: url('/images/button-icon/Arrow-Rigth.svg');
       background-size: 16px 16px;
     }
   }
