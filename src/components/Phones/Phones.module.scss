@@ -142,7 +142,8 @@
     display: grid;
     gap: 40px 16px;
     margin-top: 24px;
-    grid-template-columns: repeat(auto-fill, minmax(212px, 1fr));
+    grid-template-columns: repeat(1, 1fr);
+
     justify-items: center;
 
     @include onScreen640 {
