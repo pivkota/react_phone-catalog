@@ -179,7 +179,6 @@
     gap: 8px;
   }
 
-  &__item,
   &__arrow {
     display: flex;
     align-items: center;
@@ -206,11 +205,32 @@
   }
 
   &__item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    color: $text-primary;
+    font-family: $font-main;
+    font-size: 14px;
+    transition: all 0.2s;
+
     border: none;
     background-color: $color-surface1;
-    
+
+    &:disabled {
+      opacity: 0.3;
+      cursor: default;
+      background-color: $bg-main;
+    }
+
+    &:hover:not(:disabled) {
+      background-color: $color-icons;
+    }
+
     &--active {
-      border-color: $color-accent;
+      border: 1px solid $color-accent;
       background-color: $color-accent;
       cursor: default;
       color: #fff;

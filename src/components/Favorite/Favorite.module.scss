@@ -59,13 +59,19 @@
   }
 
   &__empty {
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     text-align: center;
-    padding: 100px 0;
+    padding: 0;
 
     h2 {
+      margin: 0;
       font-size: 24px;
-      color: $text-secondary;
       font-weight: $font-regular;
+      color: $text-secondary;
     }
   }
 }

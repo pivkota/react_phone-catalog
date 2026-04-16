@@ -38,6 +38,9 @@
     margin-bottom: 8px;
 
     @include productCardItemPhoto;
+
+    margin-left: auto;
+    margin-right: auto;
   }
 
   &__image {
