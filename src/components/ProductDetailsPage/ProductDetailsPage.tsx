@@ -104,6 +104,14 @@ export const ProductDetailsPage: React.FC = () => {
     return () => controller.abort();
   }, [productId, category, updateScrollButtons]);
 
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth',
+    });
+  }, [productId]);
+
   const handleScroll = (direction: 'left' | 'right') => {
     if (listRef.current) {
       const containerWidth = listRef.current.clientWidth;

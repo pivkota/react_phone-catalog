@@ -54,37 +54,41 @@ export const ProductCard: React.FC<Props> = ({
         <img src={image} alt={name} className={styles.card__image} />
       </Link>
 
-      <h2 className={styles.card__title}>
-        <Link to={`/${category}/${itemId}`} className={styles.card__link}>
-          {name}
-        </Link>
-      </h2>
+      <div className={styles.card__content}>
+        <h2 className={styles.card__title}>
+          <Link to={`/${category}/${itemId}`} className={styles.card__link}>
+            {name}
+          </Link>
+        </h2>
 
-      <div className={styles.card__price}>
-        <span className={styles['card__price--current']}>${price}</span>
-        {hasDiscount && fullPrice !== price && (
-          <span className={styles['card__price--old']}>${fullPrice}</span>
-        )}
-      </div>
-
-      <div className={styles.card__divider} />
-
-      <div className={styles.card__specs}>
-        <div className={styles.card__spec}>
-          <span className={styles['card__spec-label']}>
-            {t('product.screen')}
-          </span>
-          <span className={styles['card__spec-value']}>{screen}</span>
+        <div className={styles.card__price}>
+          <span className={styles['card__price--current']}>${price}</span>
+          {hasDiscount && fullPrice !== price && (
+            <span className={styles['card__price--old']}>${fullPrice}</span>
+          )}
         </div>
-        <div className={styles.card__spec}>
-          <span className={styles['card__spec-label']}>
-            {t('product.built_in_memory')}
-          </span>
-          <span className={styles['card__spec-value']}>{capacity}</span>
-        </div>
-        <div className={styles.card__spec}>
-          <span className={styles['card__spec-label']}>{t('product.ram')}</span>
-          <span className={styles['card__spec-value']}>{ram}</span>
+
+        <div className={styles.card__divider} />
+
+        <div className={styles.card__specs}>
+          <div className={styles.card__spec}>
+            <span className={styles['card__spec-label']}>
+              {t('product.screen')}
+            </span>
+            <span className={styles['card__spec-value']}>{screen}</span>
+          </div>
+          <div className={styles.card__spec}>
+            <span className={styles['card__spec-label']}>
+              {t('product.built_in_memory')}
+            </span>
+            <span className={styles['card__spec-value']}>{capacity}</span>
+          </div>
+          <div className={styles.card__spec}>
+            <span className={styles['card__spec-label']}>
+              {t('product.ram')}
+            </span>
+            <span className={styles['card__spec-value']}>{ram}</span>
+          </div>
         </div>
       </div>
 

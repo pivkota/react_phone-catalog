@@ -34,7 +34,11 @@
   },
 
   "cart": {
-    "checkout_confirm": "Twoje zamówienie nie zostało jeszcze przetworzone. Czy chcesz wyczyścić koszyk?"
+    "checkout_confirm": "Twoje zamówienie nie zostało jeszcze przetworzone. Czy chcesz wyczyścić koszyk?",
+    "total_items_one": "Łącznie за {{count}} produkt",
+    "total_items_few": "Łącznie за {{count}} produkty",
+    "total_items_many": "Łącznie за {{count}} produktów",
+    "total_items_other": "Łącznie за {{count}} produktów"
   },
 
   "not_found": {

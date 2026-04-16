@@ -53,7 +53,9 @@ export const Cart: React.FC = () => {
                         alt={item.name}
                         className={styles['cart-card__image']}
                       />
-                      <p className={styles['cart-card__name']}>{item.name}</p>
+                      <p className={styles['cart-card__name']}>
+                        {item.name.split(' (')[0]}
+                      </p>
                     </Link>
                   </div>
 
