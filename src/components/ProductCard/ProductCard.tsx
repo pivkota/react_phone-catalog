@@ -8,9 +8,13 @@ import styles from './ProductCard.module.scss';
 
 interface Props {
   product: Product;
+  hasDiscount?: boolean;
 }
 
-export const ProductCard: React.FC<Props> = ({ product }) => {
+export const ProductCard: React.FC<Props> = ({
+  product,
+  hasDiscount = true,
+}) => {
   const { t } = useTranslation();
 
   const {
@@ -29,7 +33,6 @@ export const ProductCard: React.FC<Props> = ({ product }) => {
   const { cartItems, addToCart, removeFromCart } = useCart();
 
   const isFavorite = favorites.some(item => item.itemId === itemId);
-
   const isInCart = cartItems.some(
     item => String(item.itemId) === String(itemId),
   );
@@ -59,7 +62,7 @@ export const ProductCard: React.FC<Props> = ({ product }) => {
 
       <div className={styles.card__price}>
         <span className={styles['card__price--current']}>${price}</span>
-        {fullPrice !== price && (
+        {hasDiscount && fullPrice !== price && (
           <span className={styles['card__price--old']}>${fullPrice}</span>
         )}
       </div>

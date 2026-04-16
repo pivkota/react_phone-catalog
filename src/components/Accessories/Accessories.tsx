@@ -13,9 +13,30 @@ export const Accessories: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
 
   const [searchParams, setSearchParams] = useSearchParams();
+
   const sortBy = searchParams.get('sort') || 'newest';
   const perPage = searchParams.get('perPage') || '16';
   const currentPage = Number(searchParams.get('page')) || 1;
+
+  const defaultParams = {
+    sort: 'newest',
+    perPage: '16',
+    page: '1',
+  };
+
+  const updateParams = (newParams: Record<string, string>) => {
+    const params = new URLSearchParams(searchParams);
+
+    Object.entries(newParams).forEach(([key, value]) => {
+      if (value === defaultParams[key as keyof typeof defaultParams]) {
+        params.delete(key);
+      } else {
+        params.set(key, value);
+      }
+    });
+
+    setSearchParams(params);
+  };
 
   useEffect(() => {
     setLoading(true);
@@ -44,20 +65,6 @@ export const Accessories: React.FC = () => {
     return () => clearTimeout(timer);
   }, [t]);
 
-  const updateParams = (newParams: Record<string, string>) => {
-    const params = new URLSearchParams(searchParams);
-
-    Object.entries(newParams).forEach(([key, value]) => {
-      if (value === 'newest' || value === '16' || value === '1') {
-        params.delete(key);
-      } else {
-        params.set(key, value);
-      }
-    });
-
-    setSearchParams(params);
-  };
-
   const sortedAccessories = useMemo(() => {
     const result = [...accessories];
 
@@ -75,21 +82,31 @@ export const Accessories: React.FC = () => {
     return result;
   }, [accessories, sortBy]);
 
+  const itemsPerPage = perPage === 'all' ? null : Number(perPage);
+
+  const totalPages =
+    itemsPerPage === null
+      ? 0
+      : Math.ceil(sortedAccessories.length / itemsPerPage);
+
+  const safeCurrentPage =
+    totalPages > 0 ? Math.min(currentPage, totalPages) : 1;
+
   const visibleAccessories = useMemo(() => {
-    if (perPage === 'all') {
+    if (itemsPerPage === null) {
       return sortedAccessories;
     }
 
-    const itemsPerPage = Number(perPage);
-    const startIndex = (currentPage - 1) * itemsPerPage;
+    const startIndex = (safeCurrentPage - 1) * itemsPerPage;
 
     return sortedAccessories.slice(startIndex, startIndex + itemsPerPage);
-  }, [sortedAccessories, perPage, currentPage]);
+  }, [sortedAccessories, itemsPerPage, safeCurrentPage]);
 
-  const totalPages =
-    perPage === 'all'
-      ? 0
-      : Math.ceil(sortedAccessories.length / Number(perPage));
+  useEffect(() => {
+    if (currentPage > totalPages && totalPages > 0) {
+      updateParams({ page: totalPages.toString() });
+    }
+  }, [currentPage, totalPages]);
 
   if (loading) {
     return (
@@ -204,14 +221,16 @@ export const Accessories: React.FC = () => {
               ))}
             </div>
 
-            {perPage !== 'all' && totalPages > 1 && (
+            {itemsPerPage !== null && totalPages > 1 && (
               <div className={styles.pagination}>
                 <button
                   type="button"
                   className={styles.pagination__arrow}
-                  disabled={currentPage === 1}
+                  disabled={safeCurrentPage === 1}
                   onClick={() =>
-                    updateParams({ page: (currentPage - 1).toString() })
+                    updateParams({
+                      page: (safeCurrentPage - 1).toString(),
+                    })
                   }
                 >
                   {'<'}
@@ -224,7 +243,7 @@ export const Accessories: React.FC = () => {
                         key={page}
                         type="button"
                         className={`${styles.pagination__item} ${
-                          page === currentPage
+                          page === safeCurrentPage
                             ? styles['pagination__item--active']
                             : ''
                         }`}
@@ -239,9 +258,11 @@ export const Accessories: React.FC = () => {
                 <button
                   type="button"
                   className={styles.pagination__arrow}
-                  disabled={currentPage === totalPages}
+                  disabled={safeCurrentPage === totalPages}
                   onClick={() =>
-                    updateParams({ page: (currentPage + 1).toString() })
+                    updateParams({
+                      page: (safeCurrentPage + 1).toString(),
+                    })
                   }
                 >
                   {'>'}

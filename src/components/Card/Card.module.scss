@@ -136,9 +136,16 @@
 
   &__name {
     max-width: 176px;
-    color: $text-primary;
+    color: $color-white;
     font-size: 14px;
     line-height: 21px;
+
+    @include onScreen1201 {
+      max-width: none;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
   }
 
   &__controls {

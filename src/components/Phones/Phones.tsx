@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useMemo } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { ProductCard } from '../ProductCard';
 import { Loader } from '../Loader';
@@ -8,15 +8,40 @@ import styles from './Phones.module.scss';
 
 export const Phones: React.FC = () => {
   const { t } = useTranslation();
+
   const [phones, setPhones] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
-  const [sortBy, setSortBy] = useState('newest');
-  const [perPage, setPerPage] = useState('16');
-  const [currentPage, setCurrentPage] = useState(1);
   const [error, setError] = useState<string | null>(null);
+
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const sortBy = searchParams.get('sort') || 'newest';
+  const perPage = searchParams.get('perPage') || '16';
+  const currentPage = Number(searchParams.get('page')) || 1;
+
+  const defaultParams = {
+    sort: 'newest',
+    perPage: '16',
+    page: '1',
+  };
+
+  const updateParams = (newParams: Record<string, string>) => {
+    const params = new URLSearchParams(searchParams);
+
+    Object.entries(newParams).forEach(([key, value]) => {
+      if (value === defaultParams[key as keyof typeof defaultParams]) {
+        params.delete(key);
+      } else {
+        params.set(key, value);
+      }
+    });
+
+    setSearchParams(params);
+  };
 
   useEffect(() => {
     setLoading(true);
+    setError(null);
 
     const timer = setTimeout(() => {
       fetch('api/products.json')
@@ -27,9 +52,9 @@ export const Phones: React.FC = () => {
 
           return response.json();
         })
-        .then(data => {
+        .then((data: Product[]) => {
           const phoneProducts = data.filter(
-            (product: Product) => product.category === 'phones',
+            product => product.category === 'phones',
           );
 
           setPhones(phoneProducts);
@@ -37,17 +62,11 @@ export const Phones: React.FC = () => {
         .catch(() => {
           setError(t('catalog.error_message'));
         })
-        .finally(() => {
-          setLoading(false);
-        });
+        .finally(() => setLoading(false));
     }, 500);
 
     return () => clearTimeout(timer);
   }, [t]);
-
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [sortBy, perPage]);
 
   const sortedPhones = useMemo(() => {
     const result = [...phones];
@@ -58,7 +77,6 @@ export const Phones: React.FC = () => {
           return a.price - b.price;
         case 'alphabetically':
           return a.name.localeCompare(b.name);
-        case 'newest':
         default:
           return b.year - a.year;
       }
@@ -67,19 +85,29 @@ export const Phones: React.FC = () => {
     return result;
   }, [phones, sortBy]);
 
+  const itemsPerPage = perPage === 'all' ? null : Number(perPage);
+
+  const totalPages =
+    itemsPerPage === null ? 0 : Math.ceil(sortedPhones.length / itemsPerPage);
+
+  const safeCurrentPage =
+    totalPages > 0 ? Math.min(currentPage, totalPages) : 1;
+
   const visiblePhones = useMemo(() => {
-    if (perPage === 'all') {
+    if (itemsPerPage === null) {
       return sortedPhones;
     }
 
-    const itemsPerPage = Number(perPage);
-    const startIndex = (currentPage - 1) * itemsPerPage;
+    const startIndex = (safeCurrentPage - 1) * itemsPerPage;
 
     return sortedPhones.slice(startIndex, startIndex + itemsPerPage);
-  }, [sortedPhones, perPage, currentPage]);
+  }, [sortedPhones, itemsPerPage, safeCurrentPage]);
 
-  const totalPages =
-    perPage === 'all' ? 0 : Math.ceil(sortedPhones.length / Number(perPage));
+  useEffect(() => {
+    if (currentPage > totalPages && totalPages > 0) {
+      updateParams({ page: totalPages.toString() });
+    }
+  }, [currentPage, totalPages]);
 
   if (loading) {
     return (
@@ -99,7 +127,9 @@ export const Phones: React.FC = () => {
             <h2 className={styles['error-notification__title']}>
               {t('catalog.error_title')}
             </h2>
+
             <p className={styles['error-notification__text']}>{error}</p>
+
             <button
               type="button"
               className={styles['error-notification__button']}
@@ -116,7 +146,7 @@ export const Phones: React.FC = () => {
   return (
     <div className={styles.phones}>
       <div className={styles.phones__container}>
-        <nav className={`${styles.phones__breadcrumbs} ${styles.breadcrumbs}`}>
+        <nav className={styles.phones__breadcrumbs}>
           <Link to="/" className={styles.breadcrumbs__link}>
             <img
               src="/images/icons/home.svg"
@@ -137,6 +167,7 @@ export const Phones: React.FC = () => {
         </nav>
 
         <h1 className={styles.phones__title}>{t('catalog.main_title')}</h1>
+
         <p className={styles.phones__count}>
           {t('catalog.models_count', { count: phones.length })}
         </p>
@@ -148,10 +179,13 @@ export const Phones: React.FC = () => {
                 <label htmlFor="sort-select" className={styles.phones__label}>
                   {t('catalog.sort_label')}
                 </label>
+
                 <select
                   id="sort-select"
                   value={sortBy}
-                  onChange={e => setSortBy(e.target.value)}
+                  onChange={e =>
+                    updateParams({ sort: e.target.value, page: '1' })
+                  }
                   className={styles.phones__select}
                 >
                   <option value="newest">{t('catalog.sort_newest')}</option>
@@ -169,10 +203,13 @@ export const Phones: React.FC = () => {
                 >
                   {t('catalog.per_page_label')}
                 </label>
+
                 <select
                   id="per-page-select"
                   value={perPage}
-                  onChange={e => setPerPage(e.target.value)}
+                  onChange={e =>
+                    updateParams({ perPage: e.target.value, page: '1' })
+                  }
                   className={`${styles.phones__select} ${styles['phones__select--short']}`}
                 >
                   <option value="8">8</option>
@@ -188,13 +225,17 @@ export const Phones: React.FC = () => {
               ))}
             </div>
 
-            {perPage !== 'all' && totalPages > 1 && (
+            {itemsPerPage !== null && totalPages > 1 && (
               <div className={styles.pagination}>
                 <button
                   type="button"
                   className={styles.pagination__arrow}
-                  disabled={currentPage === 1}
-                  onClick={() => setCurrentPage(prev => prev - 1)}
+                  disabled={safeCurrentPage === 1}
+                  onClick={() =>
+                    updateParams({
+                      page: (safeCurrentPage - 1).toString(),
+                    })
+                  }
                 >
                   {'<'}
                 </button>
@@ -206,11 +247,11 @@ export const Phones: React.FC = () => {
                         key={page}
                         type="button"
                         className={`${styles.pagination__item} ${
-                          page === currentPage
+                          page === safeCurrentPage
                             ? styles['pagination__item--active']
                             : ''
                         }`}
-                        onClick={() => setCurrentPage(page)}
+                        onClick={() => updateParams({ page: page.toString() })}
                       >
                         {page}
                       </button>
@@ -221,8 +262,12 @@ export const Phones: React.FC = () => {
                 <button
                   type="button"
                   className={styles.pagination__arrow}
-                  disabled={currentPage === totalPages}
-                  onClick={() => setCurrentPage(prev => prev + 1)}
+                  disabled={safeCurrentPage === totalPages}
+                  onClick={() =>
+                    updateParams({
+                      page: (safeCurrentPage + 1).toString(),
+                    })
+                  }
                 >
                   {'>'}
                 </button>

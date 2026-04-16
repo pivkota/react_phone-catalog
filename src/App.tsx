@@ -5,10 +5,10 @@ import { Aside } from './components/Aside/Aside';
 import { Footer } from './components/Footer';
 import { CartProvider } from './context/CartContext';
 import { useTranslation } from 'react-i18next';
-import './App.module.scss';
+import styles from './App.module.scss'; // Імпортуємо як styles
 
 export const App = () => {
-  const { i18n } = useTranslation(); // Витягуємо i18n
+  const { i18n } = useTranslation();
 
   const changeLanguage = (lng: string) => {
     i18n.changeLanguage(lng);
@@ -41,14 +41,18 @@ export const App = () => {
 
   return (
     <CartProvider>
-      <div className="App">
+      <div className={styles.app}>
+        {' '}
+        {/* Використовуємо styles.app */}
         <Navbar
           onBurgerClick={openMenu}
           currentLang={i18n.language}
           onChangeLang={changeLanguage}
         />
         <Aside isOpen={isMenuOpen} onClose={closeMenu} />
-        <main className="main">
+        <main className={styles.app__main}>
+          {' '}
+          {/* Використовуємо styles.app__main */}
           <Outlet />
         </main>
         <Footer />

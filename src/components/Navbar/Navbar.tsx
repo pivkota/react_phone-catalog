@@ -21,8 +21,7 @@ export const Navbar: React.FC<Props> = ({
   const { cartItems } = useCart();
 
   const favoritesCount = favorites.length;
-  const cartCount = cartItems.length;
-
+  const cartCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
   const getNavLinkClass = ({ isActive }: { isActive: boolean }) =>
     isActive
       ? `${styles.navbar__link} ${styles['navbar__link--active']}`

@@ -1,12 +1,11 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useCart } from '../../context/CartContext';
 import styles from './Card.module.scss';
 
 export const Cart: React.FC = () => {
   const { t } = useTranslation();
-  // Додаємо clearCart з контексту
   const { cartItems, removeFromCart, changeQuantity, clearCart } = useCart();
   const navigate = useNavigate();
 
@@ -45,12 +44,17 @@ export const Cart: React.FC = () => {
                       onClick={() => removeFromCart(item.itemId)}
                       aria-label="Remove item"
                     />
-                    <img
-                      src={item.image}
-                      alt={item.name}
-                      className={styles['cart-card__image']}
-                    />
-                    <p className={styles['cart-card__name']}>{item.name}</p>
+                    <Link
+                      to={`/phones/${item.itemId}`}
+                      className={styles['cart-card__info']}
+                    >
+                      <img
+                        src={item.image}
+                        alt={item.name}
+                        className={styles['cart-card__image']}
+                      />
+                      <p className={styles['cart-card__name']}>{item.name}</p>
+                    </Link>
                   </div>
 
                   <div className={styles['cart-card__controls']}>
@@ -83,7 +87,7 @@ export const Cart: React.FC = () => {
             <div className={`${styles.cart__summary} ${styles.summary}`}>
               <h2 className={styles.summary__total}>${totalPrice}</h2>
               <p className={styles.summary__count}>
-                {t('catalog.models_count', { count: totalItems })}
+                {t('cart.total_items', { count: totalItems })}
               </p>
               <div className={styles.summary__line} />
               <button

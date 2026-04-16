@@ -203,7 +203,7 @@ export const Main: React.FC = () => {
         <div className={styles.main__slider}>
           <div className={styles.main__track} ref={newSlider.ref}>
             {brandNewProducts.map(p => (
-              <ProductCard key={p.id} product={p} />
+              <ProductCard key={p.id} product={p} hasDiscount={false} />
             ))}
           </div>
         </div>
