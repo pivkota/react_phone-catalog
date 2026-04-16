@@ -185,8 +185,8 @@
     align-items: center;
     justify-content: center;
     border: 1px solid $color-elements;
-    width: 40px;
-    height: 40px;
+    width: 32px;
+    height: 32px;
     background-color: $color-surface2;
     cursor: pointer;
     color: $text-primary;
@@ -206,6 +206,9 @@
   }
 
   &__item {
+    border: none;
+    background-color: $color-surface1;
+    
     &--active {
       border-color: $color-accent;
       background-color: $color-accent;

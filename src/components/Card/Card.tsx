@@ -45,7 +45,7 @@ export const Cart: React.FC = () => {
                       aria-label="Remove item"
                     />
                     <Link
-                      to={`/phones/${item.itemId}`}
+                      to={`/${item.category}/${item.itemId}`}
                       className={styles['cart-card__info']}
                     >
                       <img

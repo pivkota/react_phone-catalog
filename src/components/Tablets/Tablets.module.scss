@@ -2,6 +2,7 @@
 @import '../mixins';
 
 .tablets {
+  padding-bottom: 64px;
   padding: 0 16px;
 
   @include onScreen640 {
@@ -10,6 +11,7 @@
 
   @include onScreen1200 {
     padding: 0 32px;
+    padding-bottom: 80px;
   }
 
   .container {
@@ -202,8 +204,8 @@
     align-items: center;
     justify-content: center;
     border: 1px solid $color-elements;
-    width: 40px;
-    height: 40px;
+    width: 32px;
+    height: 32px;
     background-color: $color-surface2;
     cursor: pointer;
     color: $text-primary;
@@ -223,6 +225,9 @@
   }
 
   &__item {
+    border: none;
+    background-color: $color-surface1;
+    
     &--active {
       border-color: $color-accent;
       background-color: $color-accent;
